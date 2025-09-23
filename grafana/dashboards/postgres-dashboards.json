@@ -1,0 +1,86 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "PostgreSQL Dashboard",
+    "tags": ["postgresql", "monitoring"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "PostgreSQL Connections",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "pg_stat_database_numbackends{datname=\"monitoring_db\"}",
+            "legendFormat": "Active Connections"
+          }
+        ],
+        "xAxis": {
+          "show": true
+        },
+        "yAxes": [
+          {
+            "label": "Connections",
+            "show": true
+          }
+        ],
+        "legend": {
+          "show": true
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": 2,
+        "title": "Database Size",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "pg_database_size_bytes{datname=\"monitoring_db\"}",
+            "legendFormat": "Database Size"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        }
+      },
+      {
+        "id": 3,
+        "title": "Query Performance",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(pg_stat_database_tup_inserted{datname=\"monitoring_db\"}[5m])",
+            "legendFormat": "Inserts/sec"
+          },
+          {
+            "expr": "rate(pg_stat_database_tup_updated{datname=\"monitoring_db\"}[5m])",
+            "legendFormat": "Updates/sec"
+          },
+          {
+            "expr": "rate(pg_stat_database_tup_deleted{datname=\"monitoring_db\"}[5m])",
+            "legendFormat": "Deletes/sec"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 8
+        }
+      }
+    ],
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "refresh": "5s"
+  }
+}
