@@ -4,7 +4,10 @@ server:
 spring:
   application:
     name: monitoring-app
-  
+
+  autoconfigure:
+    exclude: org.springframework.boot.actuate.autoconfigure.metrics.SystemMetricsAutoConfiguration
+
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/monitoring_db}
     username: ${SPRING_DATASOURCE_USERNAME:postgres}
