@@ -35,6 +35,9 @@ management:
     metrics:
       enabled: true
   metrics:
+    enable:
+      system:
+        processor: false
     export:
       prometheus:
         enabled: true
